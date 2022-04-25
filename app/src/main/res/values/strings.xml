@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GreekMovieList</string>
+    <string name="item_title">Item_title</string>
+    <string name="item_detail">Item_detail</string>
+    <string name="item_image_description">Item_image_description</string>
+
 </resources>
