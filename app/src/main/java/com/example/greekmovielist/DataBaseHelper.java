@@ -14,13 +14,13 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
 //    Global μεταβλητές που τις χρησιμοποιώ συχνά και προτιμώ το autofill όταν τις γράφω για ευκολία
-    public static final String MOVIE_TABLE = "MOVIE_TABLE";
-    public static final String COL_MOVIE_NAME = "MOVIE_NAME";
-    public static final String COL_MOVIE_PLOT = "MOVIE_PLOT";
-    public static final String COL_ID = "MOVIE_ID";
+    public static final String MOVIE_TABLE = "movie";
+    public static final String COL_MOVIE_NAME = "title";
+    public static final String COL_MOVIE_PLOT = "duration";
+    public static final String COL_ID = "_id";
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "greekMovies.db", null, 1);
+        super(context, "greekMovie.db", null, 1);
     }
 
     //Η μέθοδος που θα καλεστεί την πρώτη φορά που θα καλέσεις κάποιο database object
