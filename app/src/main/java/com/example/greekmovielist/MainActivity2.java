@@ -8,11 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MainActivity2 extends AppCompatActivity {
 
     ListView lv_movieList;
+    DataBaseHelper dataBaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +22,16 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         lv_movieList = findViewById(R.id.lv_movieList);
+        try {
+            dataBaseHelper = new DataBaseHelper(MainActivity2.this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void viewAll(View view) {
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity2.this);
+
         List<Movie> allMovies = dataBaseHelper.getAllMovies();
 
         ArrayAdapter movieArrayAdapter = new ArrayAdapter<Movie>(MainActivity2.this, android.R.layout.simple_list_item_1, allMovies);

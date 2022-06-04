@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     Button nextPage1Button, addMovieButton, nextPage2Button;
     EditText addName, addPlot;
+    DataBaseHelper dataBaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         nextPage1Button = findViewById(R.id.nextPage1Btn);
         nextPage2Button = findViewById(R.id.nextPage2Btn);
         addMovieButton = findViewById(R.id.addNewMovie);
-        addName = findViewById(R.id.addName);
+        //addName = findViewById(R.id.addName);
         addPlot = findViewById(R.id.addPlot);
 
         nextPage2Button.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
                 nextPage2(view);
             }
         });
+
+        try {
+            dataBaseHelper = new DataBaseHelper(MainActivity.this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void nextPage1 (View view){
@@ -57,11 +66,9 @@ public class MainActivity extends AppCompatActivity {
             movie = new Movie(-1, "error", "error");
         }
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
+        //boolean success = dataBaseHelper.addOne(movie);
 
-        boolean success = dataBaseHelper.addOne(movie);
-
-        Toast.makeText(MainActivity.this, "Success= " + success, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "Success= " + success, Toast.LENGTH_SHORT).show();
 
     }
 
