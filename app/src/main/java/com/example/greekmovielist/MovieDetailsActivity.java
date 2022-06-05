@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -49,5 +50,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         movieTitleText.setText(selectedMovie.getTitle());
         movieDescriptionText.setText(selectedMovie.getDescription());
         moviePoster.setImageResource(getResources().getIdentifier(selectedMovie.getImageName(), "drawable", this.getPackageName()));
+
+        String temptext = "";
+        ArrayList<Contributor> contributors = selectedMovie.getContributors();
+        for(Contributor c : contributors) {
+            temptext += c.getRole() + ": " + c.getName() + "\n";
+        }
+        movieAttributesText.setText(temptext);
     }
 }
