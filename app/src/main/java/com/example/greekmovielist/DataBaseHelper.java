@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.SQLException;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -124,10 +125,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()){
             do {
                 int movieID = cursor.getInt(0); //έβαλα μηδέν γιατί ξέρω ότι το id είναι στη θέση μηδέν
-                String movieName = cursor.getString(1);
+                String movieTitle = cursor.getString(1);
+                String movieReleaseDate = cursor.getString(2);
+                int movieDuration = cursor.getInt(3);
+                String movieBasedOn = cursor.getString(4);
+                String movieImageName = cursor.getString(5);
                 String moviePlot = cursor.getString(6);
 
-                Movie newMovie = new Movie(movieID,movieName,moviePlot);
+                Movie newMovie = new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot);
                 returnList.add(newMovie);
             }while(cursor.moveToNext()); //παίρνει ένα-ένα τα στοιχεία της βάσης
         }
@@ -138,5 +143,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return returnList;
+    }
+
+    public Movie getMovieById(int movieid) {
+        Movie movie = null;
+        String query = "Select * FROM " + MOVIE_TABLE + " WHERE " + COL_ID + " = " + movieid;
+        Cursor cursor = myDataBase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            int movieID = cursor.getInt(0); //έβαλα μηδέν γιατί ξέρω ότι το id είναι στη θέση μηδέν
+            String movieTitle = cursor.getString(1);
+            String movieReleaseDate = cursor.getString(2);
+            int movieDuration = cursor.getInt(3);
+            String movieBasedOn = cursor.getString(4);
+            String movieImageName = cursor.getString(5);
+            String moviePlot = cursor.getString(6);
+
+            movie = new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot);
+        }
+        return movie;
     }
 }

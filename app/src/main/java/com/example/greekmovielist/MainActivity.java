@@ -7,14 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
     Button nextPage1Button, addMovieButton, nextPage2Button;
-    EditText addName, addPlot;
+    EditText addMovieid;
     DataBaseHelper dataBaseHelper;
 
     @Override
@@ -24,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
         nextPage1Button = findViewById(R.id.nextPage1Btn);
         nextPage2Button = findViewById(R.id.nextPage2Btn);
-        addMovieButton = findViewById(R.id.addNewMovie);
-        //addName = findViewById(R.id.addName);
-        addPlot = findViewById(R.id.addPlot);
+        addMovieButton = findViewById(R.id.showMovie);
+        addMovieid = findViewById(R.id.addMovieid);
 
         nextPage2Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,21 +54,27 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void addMovie (View view){
-        Movie movie;
-        try {
-            movie = new Movie(-1, addName.getText().toString(),addPlot.getText().toString());
-            Toast.makeText(MainActivity.this, movie.toString(), Toast.LENGTH_SHORT).show();
-        }catch(Exception e){
-            Toast.makeText(MainActivity.this, "error creating movie", Toast.LENGTH_SHORT).show();
-            movie = new Movie(-1, "error", "error");
-        }
-
-        //boolean success = dataBaseHelper.addOne(movie);
-
-        //Toast.makeText(MainActivity.this, "Success= " + success, Toast.LENGTH_SHORT).show();
-
+    public void showMovie (View view) {
+        Intent i = new Intent(this, MovieDetailsActivity.class);
+        i.putExtra("movieid", Integer.valueOf(String.valueOf(addMovieid.getText())));
+        startActivity(i);
     }
+
+//    public void addMovie (View view){
+//        Movie movie;
+//        try {
+//            movie = new Movie(-1, addName.getText().toString(),addMovieid.getText().toString());
+//            Toast.makeText(MainActivity.this, movie.toString(), Toast.LENGTH_SHORT).show();
+//        }catch(Exception e){
+//            Toast.makeText(MainActivity.this, "error creating movie", Toast.LENGTH_SHORT).show();
+//            movie = new Movie(-1, "error", "error");
+//        }
+//
+//        //boolean success = dataBaseHelper.addOne(movie);
+//
+//        //Toast.makeText(MainActivity.this, "Success= " + success, Toast.LENGTH_SHORT).show();
+//
+//    }
 
 
 
