@@ -132,7 +132,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String movieImageName = cursor.getString(5);
                 String moviePlot = cursor.getString(6);
 
-                Movie newMovie = new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot);
+                ArrayList<Contributor> contributors = new ArrayList<>();
+                query = "SELECT contributor__id, name, title\n" +
+                        "FROM movie_has_contributor\n" +
+                        "INNER JOIN contributor ON contributor__id = contributor._id\n" +
+                        "INNER JOIN entity ON entity__id = entity._id\n" +
+                        "INNER JOIN role ON role__id = role._id\n" +
+                        "WHERE movie__id = " + movieID +
+                        "ORDER BY title";
+                Cursor contributorCursor = db.rawQuery(query, null);
+                if(contributorCursor.moveToFirst()) {
+                    do {
+                       contributors.add(new Contributor(contributorCursor.getInt(0), contributorCursor.getString(1), contributorCursor.getString(2)));
+                    } while(contributorCursor.moveToNext());
+                }
+
+                Movie newMovie = new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot, contributors);
                 returnList.add(newMovie);
             }while(cursor.moveToNext()); //παίρνει ένα-ένα τα στοιχεία της βάσης
         }
@@ -158,7 +173,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             String movieImageName = cursor.getString(5);
             String moviePlot = cursor.getString(6);
 
-            movie = new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot);
+            ArrayList<Contributor> contributors = new ArrayList<>();
+            query = "SELECT contributor__id, name, title\n" +
+                    "FROM movie_has_contributor\n" +
+                    "INNER JOIN contributor ON contributor__id = contributor._id\n" +
+                    "INNER JOIN entity ON entity__id = entity._id\n" +
+                    "INNER JOIN role ON role__id = role._id\n" +
+                    "WHERE movie__id = " + movieID +
+                    " ORDER BY title";
+            Cursor contributorCursor = myDataBase.rawQuery(query, null);
+            if(contributorCursor.moveToFirst()) {
+                do {
+                    contributors.add(new Contributor(contributorCursor.getInt(0), contributorCursor.getString(1), contributorCursor.getString(2)));
+                } while(contributorCursor.moveToNext());
+            }
+
+            movie = new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot, contributors);
         }
         return movie;
     }
