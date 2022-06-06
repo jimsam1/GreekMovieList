@@ -192,4 +192,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return movie;
     }
+
+    public int getMovieidByTitle(String title) {
+
+        int id = 0;
+        String query = "SELECT _id FROM " + MOVIE_TABLE + " WHERE title LIKE '%" + title + "%'";
+        Cursor cursor = myDataBase.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            id = cursor.getInt(0);
+        }
+        return id;
+    }
 }
