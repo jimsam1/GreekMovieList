@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -23,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
 //    String[] name = {"Μήτσος", "Μητρούσης","Δημήτρης", "Τάκης", "Μητσάκος","Δημητράκης","Μητσούκος","Μήτσουλας","Μητσάκος","Μήτσους","Μητσούλης"};
 //    String[] emptyName = {};
     String[] movieTitles;
+    Button allMoviesButton;
 
     DataBaseHelper dataBaseHelper;
     private ArrayAdapter<String> arrayAdapter;
@@ -32,6 +34,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        allMoviesButton = findViewById(R.id.allMoviesBtn);
+
+        allMoviesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                allMoviesPage(view);
+            }
+        });
 
 
         try {
@@ -54,6 +64,12 @@ public class HomeActivity extends AppCompatActivity {
         lv_movieList = findViewById(R.id.lv_movieList);
         lv_movieList.setAdapter(arrayAdapter);
 
+    }
+
+    public void allMoviesPage(View view){
+        Intent i = new Intent(this, MainActivity3.class);
+
+        startActivity(i);
     }
 
     @Override
