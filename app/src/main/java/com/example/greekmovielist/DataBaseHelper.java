@@ -139,7 +139,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         "INNER JOIN entity ON entity__id = entity._id\n" +
                         "INNER JOIN role ON role__id = role._id\n" +
                         "WHERE movie__id = " + movieID +
-                        "ORDER BY title";
+                        " ORDER BY title";
                 Cursor contributorCursor = db.rawQuery(query, null);
                 if(contributorCursor.moveToFirst()) {
                     do {
