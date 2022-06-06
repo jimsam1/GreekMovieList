@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +20,7 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        lv_movieList = findViewById(R.id.lv_movieList);
+        lv_movieList = findViewById(R.id.lv_movieList2);
         try {
             dataBaseHelper = new DataBaseHelper(MainActivity2.this);
         } catch (IOException e) {
