@@ -1,6 +1,7 @@
 package com.example.greekmovielist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     //Class that holds the items to be displayed (Views in card_layout)
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImage;
         TextView itemTitle;
         TextView itemDetail;
@@ -61,9 +62,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     int position = getAdapterPosition();
-
-                    Snackbar.make(v, "Click detected on item " + position,
-                            Snackbar.LENGTH_LONG).show();
+                    Intent i = new Intent(v.getContext(), MovieDetailsActivity.class);
+                    i.putExtra("movieid", movies.get(position).getId());
+                    context.startActivity(i);
                 }
             });
         }
