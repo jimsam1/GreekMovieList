@@ -3,19 +3,18 @@ package com.example.greekmovielist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -80,12 +79,7 @@ public class HomeActivity extends AppCompatActivity {
                 }else{
                     lv_movieList.setFilterText(query.toString());
                 }
-
-//                String name;
-//                for(int k=0;k<lv_movieList.getAdapter().getCount();k++){
-//                     name = (String) parent.getItemAtPosition(position);
-//                    searchResults[i] = lv_movieList.getAdapter().getItem();
-//                }
+                i.putExtra("inputQuery", query);
                 startActivity(i);
                 return false;
             }
@@ -103,6 +97,25 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        Intent i2 = new Intent(this,MovieDetailsActivity.class);
+
+
+        lv_movieList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            String title;
+
+            public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+
+                title = parentAdapter.getItemAtPosition(position).toString();
+                int movieId = dataBaseHelper.getMovieidByTitle(title);
+//                Log.d("YOLO",Integer.toString((int) id));
+                i2.putExtra("movieid", movieId);
+                startActivity(i2);
+
+            }
+        });
+
+
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
