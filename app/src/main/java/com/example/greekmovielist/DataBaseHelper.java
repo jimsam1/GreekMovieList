@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.SQLException;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -191,6 +190,49 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             movie = new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot, contributors);
         }
         return movie;
+    }
+
+    public ArrayList<Movie> getMovieListByQuery(String inputQuery) {
+        Movie movie = null;
+        ArrayList<Movie> movies = new ArrayList<>();
+        String query = "SELECT DISTINCT movie._id, movie.title, movie.releaseDate, movie.duration, movie.basedOn ,movie.imageName, movie.description\n" +
+                "FROM movie_has_contributor\n" +
+                "INNER JOIN contributor ON movie_has_contributor.contributor__id = contributor._id\n" +
+                "INNER JOIN entity ON contributor.entity__id = entity._id\n" +
+                "INNER JOIN movie ON movie_has_contributor.movie__id = movie._id\n" +
+                "WHERE movie.title LIKE '%" + inputQuery + "%' OR movie.description LIKE '%" + inputQuery + "%' OR entity.name LIKE '%" + inputQuery + "%'\n" +
+                " ORDER BY movie.title";
+        Cursor cursor = myDataBase.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                int movieID = cursor.getInt(0); //έβαλα μηδέν γιατί ξέρω ότι το id είναι στη θέση μηδέν
+                String movieTitle = cursor.getString(1);
+                String movieReleaseDate = cursor.getString(2);
+                int movieDuration = cursor.getInt(3);
+                String movieBasedOn = cursor.getString(4);
+                String movieImageName = cursor.getString(5);
+                String moviePlot = cursor.getString(6);
+
+                ArrayList<Contributor> contributors = new ArrayList<>();
+                query = "SELECT contributor__id, name, title\n" +
+                        "FROM movie_has_contributor\n" +
+                        "INNER JOIN contributor ON contributor__id = contributor._id\n" +
+                        "INNER JOIN entity ON entity__id = entity._id\n" +
+                        "INNER JOIN role ON role__id = role._id\n" +
+                        "WHERE movie__id = " + movieID +
+                        " ORDER BY title";
+                Cursor contributorCursor = myDataBase.rawQuery(query, null);
+                if(contributorCursor.moveToFirst()) {
+                    do {
+                        contributors.add(new Contributor(contributorCursor.getInt(0), contributorCursor.getString(1), contributorCursor.getString(2)));
+                    } while(contributorCursor.moveToNext());
+                }
+
+                movies.add(new Movie(movieID, movieTitle, movieReleaseDate, movieDuration, movieBasedOn, movieImageName, moviePlot, contributors));
+
+            } while(cursor.moveToNext());
+        }
+        return movies;
     }
 
     public int getMovieidByTitle(String title) {
