@@ -39,11 +39,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.context = context;
         for(int i=0; i<this.movies.size(); i++){
             this.movieTitles.add(this.movies.get(i).getTitle());
-            //PROBLEM
-            Log.i("Testing", this.movies.get(i).getImageName());
             this.moviePosters.add(this.context.getResources().
-                    getIdentifier(this.movies.get(i).getImageName() , "drawable", this.context.getPackageName()));
-            Log.i("Testing", String.valueOf(this.moviePosters));
+                    getIdentifier(this.movies.get(i).getImageName(), "drawable", this.context.getPackageName()));
             this.movieDetails.add(this.movies.get(i).getDescription());
         }
     }
