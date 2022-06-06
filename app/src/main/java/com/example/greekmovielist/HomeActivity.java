@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void allMoviesPage(View view){
-        Intent i = new Intent(this, MainActivity3.class);
+        Intent i = new Intent(this, MovieListActivity.class);
 
         startActivity(i);
     }
@@ -82,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) menuitem.getActionView();
         searchView.setQueryHint("Αναζήτησε ταινίες εδώ!");
         lv_movieList.setVisibility(View.INVISIBLE);
-        Intent i = new Intent(this,MainActivity3.class);
+        Intent i = new Intent(this, MovieListActivity.class);
 
         final String[]searchResults = new String[10];
 

@@ -8,7 +8,7 @@ import android.os.Bundle;
 import java.io.IOException;
 import java.util.List;
 
-public class MainActivity3 extends AppCompatActivity {
+public class MovieListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder> adapter;
@@ -25,7 +25,7 @@ public class MainActivity3 extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         try {
-            dataBaseHelper = new DataBaseHelper(MainActivity3.this);
+            dataBaseHelper = new DataBaseHelper(MovieListActivity.this);
         } catch (IOException e) {
             e.printStackTrace();
         }

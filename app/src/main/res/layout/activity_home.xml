@@ -36,7 +36,7 @@
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Τώρα ψάξε τις αγαπημένες σου ταινίες, εύκολα και γρήγορα!"
+        android:text="@string/HomeActivityHeader"
         android:textAlignment="center"
         android:textColor="@color/blue_700"
         android:textSize="24sp"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="ΔΕΙΤΕ ΟΛΕΣ ΤΙΣ ΤΑΙΝΙΕς"
+        android:text="@string/HomeActivityButton"
         android:layout_marginBottom="150dp"
         />
 
