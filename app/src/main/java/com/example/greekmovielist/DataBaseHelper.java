@@ -17,16 +17,11 @@ import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-//    Global μεταβλητές που τις χρησιμοποιώ συχνά και προτιμώ το autofill όταν τις γράφω για ευκολία
+
     public Context myContext;
     public String DB_PATH;
     public SQLiteDatabase myDataBase;
     public static final String DB_NAME = "greekmovielist.db";
-    public static final String MOVIE_TABLE = "movie";
-    public static final String COL_MOVIE_NAME = "title";
-    public static final String COL_MOVIE_PLOT = "duration";
-    public static final String COL_ID = "_id";
-
 
     public DataBaseHelper(Context context) throws IOException {
         super(context,DB_NAME,null,1);
@@ -123,7 +118,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Movie> returnList = new ArrayList<>();
 
         //Select all data from movie table
-        String query = "Select * FROM " + MOVIE_TABLE;
+        String query = "Select * FROM movie";
 
         Cursor cursor = myDataBase.rawQuery(query, null);
         if (cursor.moveToFirst()){
@@ -138,7 +133,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //returns one movie identified by id from database as object of Movie class
     public Movie getMovieById(int movieid) {
         Movie movie = null;
-        String query = "Select * FROM " + MOVIE_TABLE + " WHERE " + COL_ID + " = " + movieid;
+        String query = "Select * FROM movie WHERE _id = " + movieid;
         Cursor cursor = myDataBase.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             movie = getMovieFromCursor(cursor);
@@ -170,7 +165,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public int getMovieidByTitle(String title) {
         int id = 0;
-        String query = "SELECT _id FROM " + MOVIE_TABLE + " WHERE title LIKE '%" + title + "%'";
+        String query = "SELECT _id FROM movie WHERE title LIKE '%" + title + "%'";
         Cursor cursor = myDataBase.rawQuery(query, null);
 
         if(cursor.moveToFirst()) {
