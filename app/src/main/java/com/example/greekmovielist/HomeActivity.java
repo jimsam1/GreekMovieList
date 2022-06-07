@@ -123,7 +123,6 @@ public class HomeActivity extends AppCompatActivity {
 
                 title = parentAdapter.getItemAtPosition(position).toString();
                 int movieId = dataBaseHelper.getMovieidByTitle(title);
-//                Log.d("YOLO",Integer.toString((int) id));
                 i2.putExtra("movieid", movieId);
                 startActivity(i2);
 
