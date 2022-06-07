@@ -47,7 +47,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //do nothing
     }
 
-    //If phone has no greekmovielist databse - create it from assets folder
+    //If package folder has no greekmovielist databse - create it from assets folder
     public void createDatabase() throws IOException {
         boolean dbexist = checkDatabase();
         if(!dbexist) {
@@ -61,7 +61,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //Check if database already exists in phone
+    //Check if database already exists in package folder
     private boolean checkDatabase() {
 
         boolean checkdb = false;
@@ -75,7 +75,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return checkdb;
     }
 
-    //Copy database from assets folder to phone
+    //Copy database from assets folder to package folder
     private void copyDatabase() throws IOException {
         //Open your local db as the input stream
         InputStream myinput = myContext.getAssets().open(DB_NAME);
@@ -163,6 +163,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return movies;
     }
 
+    //returns a movies id from its title
     public int getMovieidByTitle(String title) {
         int id = 0;
         String query = "SELECT _id FROM movie WHERE title LIKE '%" + title + "%'";
