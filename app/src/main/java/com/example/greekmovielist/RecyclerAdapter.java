@@ -28,11 +28,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public RecyclerAdapter(List<Movie> movies, Context context){
         this.movies = movies;
         this.context = context;
+        String movieDescription;
         for(int i=0; i<this.movies.size(); i++){
             this.movieTitles.add(this.movies.get(i).getTitle());
             this.moviePosters.add(this.context.getResources().
                     getIdentifier(this.movies.get(i).getImageName(), "drawable", this.context.getPackageName()));
-            this.movieDetails.add(this.movies.get(i).getDescription());
+
+
+            movieDescription = this.movies.get(i).getDescription();
+            if(movieDescription.length() > 150) {
+                movieDescription = movieDescription.substring(0, 150) + "...";
+            }
+            this.movieDetails.add(movieDescription);
         }
     }
 
