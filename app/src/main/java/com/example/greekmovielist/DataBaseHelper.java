@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         boolean dbexist = checkDatabase();
         //if database exists, open it - else create it.
         if (dbexist) {
-            opendatabase();
+            openDatabase();
         } else {
             System.out.println("Database doesn't exist");
             createDatabase();
@@ -47,7 +47,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //do nothing
     }
 
-    //If package folder has no greekmovielist databse - create it from assets folder
+    //If package folder has no greekmovielist database - create it from assets folder
     public void createDatabase() throws IOException {
         boolean dbexist = checkDatabase();
         if(!dbexist) {
@@ -100,7 +100,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //Opens database
-    public void opendatabase() throws SQLException {
+    public void openDatabase() throws SQLException {
         String mypath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(mypath, null, SQLiteDatabase.OPEN_READWRITE);
     }
