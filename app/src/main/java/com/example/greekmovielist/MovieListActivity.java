@@ -32,9 +32,12 @@ public class MovieListActivity extends AppCompatActivity {
 
         List movies = null;
         String intentQuery = getIntent().getStringExtra("inputQuery");
+        //this is activated when user taps "view all movies" button
         if(intentQuery == null) {
             movies = dataBaseHelper.getAllMovies();
-        } else {
+        }
+        //where this one, when they search
+        else {
             movies = dataBaseHelper.getMovieListByQuery(intentQuery);
         }
 
