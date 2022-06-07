@@ -43,7 +43,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    //Class that holds the items to be displayed (Views in card_layout)
+    /*
+        Class that holds the items to be displayed (Views in card_layout)
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImage;
         TextView itemTitle;
@@ -67,7 +69,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    //Methods that must be implemented for a RecyclerView.Adapter
+    /*
+        Methods that must be implemented for a RecyclerView.Adapter
+     */
     @NonNull
     @Override
     public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -83,6 +87,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.itemImage.setImageResource(moviePosters.get(position));
     }
 
+    /*
+        Returns the number of movies.
+     */
     @Override
     public int getItemCount() {
         return movieTitles.size();
