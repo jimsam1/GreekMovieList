@@ -12,7 +12,8 @@ public class Movie {
     private String imageName;
     private String description;
     private ArrayList<Contributor> contributors;
-//    constructors
+
+    //constructors
     public Movie(int id, String title, String releaseDate, int duration, String basedOn, String imageName, String description, ArrayList<Contributor> contributors) {
         this.id = id;
         this.title = title;
@@ -24,17 +25,8 @@ public class Movie {
         this.contributors = contributors;
     }
 
-//  toString ώστε να εκτυπώνουμε τα δεδομένα του αντικειμένου της κλάσης
-    @Override
-    public String toString() {
-        return "MovieModel{" +
-                "id=" + id +
-                ", name='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 
-    //    getters & setters
+    //getters & setters
     public int getId() {
         return id;
     }
@@ -47,16 +39,8 @@ public class Movie {
         return title;
     }
 
-    public void setName(String title) {
+    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getPlot() {
-        return description;
-    }
-
-    public void setPlot(String description) {
-        this.description = description;
     }
 
     public String getDescription() {

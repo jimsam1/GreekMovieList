@@ -44,6 +44,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         updateContent();
     }
 
+    //change content of views in activity
     public void updateContent() {
         Movie selectedMovie = dataBaseHelper.getMovieById(movieid);
 
