@@ -18,16 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    //Variables storing data to display for this example
-    /*private final String[] titles = {"Η Αλίκη στο Ναυτικό", "Ο Μπακαλόγατος", "Ελληνικη Ταινία 3", "Ελληνική Ταινία 4",
-            "Ελληνικη Ταινία 5", "Ελληνικη Ταινία 6", "Ελληνικη Ταινία 7", "Ελληνικη Ταινία 8"};
-    private final String[] details = {"Η Αλικη στο παει στο Ναυτικο?", "Ενα παντοπωλείο.", "Ελληνικη Ταινία 3 details",
-            "Ελληνική Ταινία 4 details", "Ελληνική Ταινία 5 details", "Ελληνική Ταινία 6 details", "Ελληνική Ταινία 7 details",
-            "Ελληνική Ταινία 8 details"};
-    private final int[] images = { R.drawable.android_image_1, R.drawable.android_image_2,
-            R.drawable.android_image_3, R.drawable.android_image_4, R.drawable.android_image_5,
-            R.drawable.android_image_6, R.drawable.android_image_7, R.drawable.android_image_8 };
-     */
 
     private List<Movie> movies;
     private List<String> movieTitles = new ArrayList<>();
