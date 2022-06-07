@@ -39,8 +39,6 @@ public class MovieListActivity extends AppCompatActivity {
         }
 
 
-        //Log.i("Testing", String.valueOf(movies));
-
         adapter = new RecyclerAdapter(movies, this);
         recyclerView.setAdapter(adapter);
     }
