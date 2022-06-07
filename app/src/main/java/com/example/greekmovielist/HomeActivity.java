@@ -20,14 +20,11 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     ListView lv_movieList;
-//    String[] name = {"Μήτσος", "Μητρούσης","Δημήτρης", "Τάκης", "Μητσάκος","Δημητράκης","Μητσούκος","Μήτσουλας","Μητσάκος","Μήτσους","Μητσούλης"};
-//    String[] emptyName = {};
     String[] movieTitles;
     Button allMoviesButton;
 
     DataBaseHelper dataBaseHelper;
     private ArrayAdapter<String> arrayAdapter;
-//    ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
+        //DB connection
         try {
             dataBaseHelper = new DataBaseHelper(HomeActivity.this);
         } catch (IOException e) {
@@ -58,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
             movieTitles[i] = (movies.get(i).getTitle());
         }
 
+        //set searchView adapter
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,movieTitles);
 
         lv_movieList = findViewById(R.id.lv_movieList);
@@ -65,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    //button to view all movies currently stored in app db
     public void allMoviesPage(View view){
         Intent i = new Intent(this, MovieListActivity.class);
 
@@ -76,17 +75,16 @@ public class HomeActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.nav_menu, menu);
 
-
         MenuItem menuitem = menu.findItem(R.id.nav_search);
         SearchView searchView = (SearchView) menuitem.getActionView();
         searchView.setQueryHint("Αναζήτησε ταινίες εδώ!");
         lv_movieList.setVisibility(View.INVISIBLE);
         Intent i = new Intent(this, MovieListActivity.class);
 
-        final String[]searchResults = new String[10];
-
+        //Method to set what happens when a query is typed at the searchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
+            //when submit button is pressed
             public boolean onQueryTextSubmit(String query){
                 lv_movieList.setVisibility(View.VISIBLE);
                 if (TextUtils.isEmpty(query)){
@@ -100,6 +98,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
+            //when query changes as user types
             public boolean onQueryTextChange(String newText){
                 lv_movieList.setVisibility(View.VISIBLE);
                 if (newText.isEmpty()) {
@@ -115,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Intent i2 = new Intent(this,MovieDetailsActivity.class);
 
-
+        //Method to set what happens when a List item is clicked.
         lv_movieList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             String title;
 
@@ -129,8 +128,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-
+//        Method to set what happens when the searchView is closed
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose(){
