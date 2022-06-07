@@ -52,6 +52,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         moviePoster.setImageResource(getResources().getIdentifier(selectedMovie.getImageName(), "drawable", this.getPackageName()));
 
         String temptext = "";
+        temptext += "Πρώτη προβολή: " + selectedMovie.getReleaseDate() + "\n";
+        temptext += "Διάρκεια: " + selectedMovie.getDurationString() + " λεπτά\n";
+        temptext += "Βασισμένο: " + selectedMovie.getBasedOn() + "\n";
         ArrayList<Contributor> contributors = selectedMovie.getContributors();
         for(Contributor c : contributors) {
             temptext += c.getRole() + ": " + c.getName() + "\n";

@@ -82,4 +82,16 @@ public class Movie {
     public void setContributors(ArrayList<Contributor> contributors) {
         this.contributors = contributors;
     }
+
+    public String getDurationString() {
+        return String.valueOf(duration);
+    }
+
+    public String getBasedOn() {
+        return basedOn;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
 }
