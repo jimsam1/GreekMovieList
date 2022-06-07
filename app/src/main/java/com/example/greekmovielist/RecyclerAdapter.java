@@ -34,7 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             this.moviePosters.add(this.context.getResources().
                     getIdentifier(this.movies.get(i).getImageName(), "drawable", this.context.getPackageName()));
 
-
+            //if description is larger than 150 characters, cut it down to 150 characters
             movieDescription = this.movies.get(i).getDescription();
             if(movieDescription.length() > 150) {
                 movieDescription = movieDescription.substring(0, 150) + "...";
